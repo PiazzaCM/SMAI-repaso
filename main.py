@@ -94,6 +94,37 @@ def calculate_correlations(df):
     print("Correlación entre years_with_company y performance_score:", correlacion_years_perf)
     print("Correlación entre salary y performance_score:", correlacion_salary_perf)
 
+#Utilizar matplotlib para crear las siguientes visualizaciones: 
+
+# Histograma del performance_score para cada departamento.
+def histograma_perfomance(df):
+    depart_group = df.groupby('depart')
+    fig, ax = plt.subplots()
+    for depart, data in depart_group:
+        data['performance_score'].plot(kind='hist', ax=ax, label=depart, alpha=0.6, bins=15)
+    ax.set_xlabel('performance_score')
+    ax.set_ylabel('Frecuencia')
+    ax.set_title('Histograma del performance_score por departamento')
+    ax.legend(title='Departamento')
+    plt.show()
+
+#Gráfico de dispersión de years_with_company vs. performance_score.
+def  yearsCompany_vs_perfomance(df):
+    fig, ax = plt.subplots()
+    ax.scatter(df['years_with_company'], df['performance_score'], alpha=0.6)
+    ax.set_xlabel('years_with_company')
+    ax.set_ylabel('performance_score')
+    ax.set_title('Gráfico de dispersión de years_with_company vs. performance_score')
+    plt.show()  
+
+#Gráfico de dispersión de salary vs. performance_score.
+def salary_vs_perfomance(df):
+    fig, ax = plt.subplots()
+    ax.scatter(df['salary'], df['performance_score'], alpha=0.6)
+    ax.set_xlabel('salary')
+    ax.set_ylabel('performance_score')
+    ax.set_title('Gráfico de dispersión de salary vs. performance_score')
+    plt.show()
 
 
 
@@ -107,6 +138,9 @@ def main():
     calculate_statistics(df)
     calculate_correlations(df)
 
+    histograma_perfomance(df)
+    yearsCompany_vs_perfomance(df)
+    salary_vs_perfomance(df)
     
     db.close()
 
